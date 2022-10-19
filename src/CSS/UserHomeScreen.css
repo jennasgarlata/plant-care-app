@@ -1,0 +1,19 @@
+.user-home-screen-container{
+
+}
+
+.user-home-screen-content{
+    display: flex;
+   }
+
+   .user-sidebar{
+    width: 22% ;
+    float:right;
+    display: block;
+   }
+
+   .sidebar-tile{
+    width:120%;
+    height:10%;
+    margin:10%
+   }
