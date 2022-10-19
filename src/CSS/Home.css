@@ -1,0 +1,59 @@
+.homepage-container{
+    height:100%;
+    width:100%;
+
+}
+
+.homepage-image-banner{
+    margin-top: 15%;
+    height:15%;
+    border: 3px solid #3C3744;
+    position: relative;
+    text-align: center;
+}
+
+.homepage-image-text{
+        position: absolute;
+        top: 30%;
+        left: 70%;
+        width: 100%;
+        transform: translate(-50%, -50%);
+}
+.homepage-image-subtext{
+    position: absolute;
+    top: 60%;
+    left: 70%;
+    width: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.homepage-header{
+
+}
+
+.homepage-sub-container{
+    display: flex;
+    justify-content: space-evenly;
+    border: 1px solid #3C3744;
+    padding: 5%;
+}
+
+.homepage-tile-image{
+    margin-top:15%;
+    justify-content: center;
+}
+
+.homepage-tile{
+    flex:1;
+    width:auto;
+    height:auto;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin: 1%;
+    background-color:#E5E5E5;
+    background-size:cover;
+    transition: all 0.4s ease-out;
+    box-shadow: 0px 35px 77px -17px rgba(0,0,0,0.44);
+    color:black;
+    font-family:'Roboto';
+}

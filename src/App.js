@@ -1,15 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import {react, useState, useEffect} from 'react'; 
+import './CSS/App.css';
+import  Home from'./Home/Home';
+import NavMenu from './NavMenu/NavMenu';
+import  UserHomeScreen from'./UserHomeScreen/UserHomeScreen';
 
 function App() {
+
+  const [userAccountInfo, setUserAccountInfo] = useState({
+    name: 'testUser',
+    plants: [1,2,3,4,5,6,7,8],
+    loaction: "Chicago, IL"
+  });
+  
+  const [selectedPage, setSelectedPage] = useState("");
+  
+  const showLoginButton = selectedPage === "" ? <button onClick={() => setSelectedPage("loggedIn")}>Log in</button> : null;
+  const renderApplication = selectedPage === "" ? <Home/> : <UserHomeScreen userAccountInfo={userAccountInfo}/>
+  
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          We're growing our site. Check back soon!
-        </p>
-      </header>
+    <div className="app">
+      <NavMenu/>
+      {showLoginButton}
+      {renderApplication}
     </div>
   );
 }
