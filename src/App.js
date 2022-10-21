@@ -2,6 +2,8 @@ import {react, useState, useEffect} from 'react';
 import './CSS/App.css';
 import  Home from'./Home/Home';
 import NavMenu from './NavMenu/NavMenu';
+import HelloWorld from './components/HelloWorld';
+import image from './Assets/homeImage.jpg'
 import  UserHomeScreen from'./UserHomeScreen/UserHomeScreen';
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
       <NavMenu/>
       {showLoginButton}
       {renderApplication}
+      <img src={image}/>
       <header className="App-header">
       <HelloWorld subreddit="reactjs"/>
       </header>
