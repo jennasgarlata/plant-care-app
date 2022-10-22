@@ -1,6 +1,6 @@
 import { WiDayCloudy } from 'react-icons/wi';
-import homeImage from '../Assets/homeImage.jpg';
-import '../CSS/Home.css';
+import homeImage from '../../Assets/homeImage.jpg';
+import '../../CSS/Home.css';
 import HomePageCard from './HomePageCard';
 
 function Home() {

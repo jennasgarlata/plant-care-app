@@ -1,8 +1,8 @@
 import {react, useState, useEffect} from 'react'; 
 import './CSS/App.css';
-import  Home from'./Home/Home';
-import  UserHomeScreen from'./UserHomeScreen/UserHomeScreen';
-import PrimarySearchAppBar from './PrimarySearchAppBar';
+import  Home from'./components/Home/Home';
+import  UserHomeScreen from'./components/UserHomeScreen/UserHomeScreen';
+import AppBar from './components/AppBar/AppBar';
 
 function App() {
 
@@ -15,12 +15,12 @@ function App() {
   const [selectedPage, setSelectedPage] = useState("");
   
   const showLoginButton = selectedPage === "" ? <button onClick={() => setSelectedPage("loggedIn")}>Log in</button> : null;
-  const renderApplication = selectedPage === "" ? <Home/> : <UserHomeScreen userAccountInfo={userAccountInfo}/>
+  const renderApplication = selectedPage === "" ? <Home /> : <UserHomeScreen userAccountInfo={userAccountInfo}/>
   
   
   return (
     <div className="App">
-      <PrimarySearchAppBar/>
+      <AppBar setSelectedPage={setSelectedPage}/>
       {renderApplication}
     </div>
   );
