@@ -1,10 +1,8 @@
 import {react, useState, useEffect} from 'react'; 
 import './CSS/App.css';
 import  Home from'./Home/Home';
-import NavMenu from './NavMenu/NavMenu';
-import HelloWorld from './components/HelloWorld';
-import image from './Assets/homeImage.jpg'
 import  UserHomeScreen from'./UserHomeScreen/UserHomeScreen';
+import PrimarySearchAppBar from './PrimarySearchAppBar';
 
 function App() {
 
@@ -22,13 +20,8 @@ function App() {
   
   return (
     <div className="App">
-      <NavMenu/>
-      {showLoginButton}
+      <PrimarySearchAppBar/>
       {renderApplication}
-      <img src={image}/>
-      <header className="App-header">
-      <HelloWorld subreddit="reactjs"/>
-      </header>
     </div>
   );
 }
