@@ -28,19 +28,15 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function PlantTile({plantData}) {
+export default function PlantTile({plant}) {
   const [expanded, setExpanded] = React.useState(false);
 
   //TEMP variables 
 
   let altText ="temp text";
   let image = tempImage;
-  let plantName = "test";
   let plantLocation = "kitchen";
   let upcomingCare = "water on 11/2/2022";
-  let waterDetails = 'moderate water';
-  let sunDetails = 'moderate sun';
-  let soilDetails = 'mix soil';
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -59,8 +55,8 @@ export default function PlantTile({plantData}) {
               <MoreVertIcon />
             </IconButton>
           }
-          title={plantName}
-          subheader={plantLocation}
+          title={plant["plant-name"]}
+          subheader={plant["plant-location"]}
         />
         <CardMedia
           component="img"
@@ -70,7 +66,7 @@ export default function PlantTile({plantData}) {
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-          {upcomingCare}
+          Last watered on: {plant["last-watered"]}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -84,12 +80,20 @@ export default function PlantTile({plantData}) {
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography paragraph>Water Needs:</Typography>
-            <Typography paragraph>{waterDetails} </Typography>
-            <Typography paragraph>Sun Needs:</Typography>
-            <Typography paragraph> {sunDetails} </Typography>
-            <Typography paragraph>Soil Needs:</Typography>
-            <Typography paragraph> {soilDetails} </Typography>
+            <Typography sx={{fontSize:"20px"}} paragraph>Generic Name:</Typography>
+            <Typography paragraph> {plant["generic-name"]} </Typography>
+            <Typography sx={{fontSize:"20px"}} paragraph>Scientific Name:</Typography>
+            <Typography paragraph> {plant["scientific-name"]} </Typography>
+            <Typography sx={{fontSize:"20px"}} paragraph>Type of Plant:</Typography>
+            <Typography paragraph>{plant.type} </Typography>
+            <Typography sx={{fontSize:"20px"}} paragraph>Direction of Window:</Typography>
+            <Typography paragraph> {plant["window-facing"]} </Typography>
+            <Typography sx={{fontSize:"20px"}}  paragraph>Water Needs:</Typography>
+            <Typography paragraph>{plant.water} </Typography>
+            <Typography sx={{fontSize:"20px"}} paragraph>Sun Needs:</Typography>
+            <Typography paragraph> {plant.sun} </Typography>
+            <Typography sx={{fontSize:"20px"}} paragraph>Soil Needs:</Typography>
+            <Typography paragraph> {plant.soil} </Typography>
           </CardContent>
         </Collapse>
       </Card>

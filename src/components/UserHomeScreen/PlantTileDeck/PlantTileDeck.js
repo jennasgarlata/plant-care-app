@@ -2,10 +2,9 @@ import {react, useState, useEffect} from 'react';
 import PlantTile from './PlantTile/PlantTile';
 import '../../../CSS/PlantTile.css';
 
-function PlantTileDeck(props) {
+function PlantTileDeck({userPlantData}) {
 
-    const listOfPlants = props.listOfPlants;
-    const renderPlantTiles = listOfPlants.map(item => <PlantTile plantdata={item}/>)
+    const renderPlantTiles = userPlantData?.map(plant=> <PlantTile plant={plant}/>)
 
 
   return (

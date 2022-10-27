@@ -1,11 +1,11 @@
 .plant-tile-deck{
     display:flex;
     flex-wrap: wrap;
-    width: 100%;
+    width: 170%;
     height:auto;
 }
 
 .plant-tile{
    margin: 1%;
-   min-width: 25%;
+   min-width: 30%;
 }

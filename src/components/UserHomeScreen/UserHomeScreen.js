@@ -4,9 +4,8 @@ import UserSidebar from './UserSideBar/UserSidebar';
 import '../../CSS/UserHomeScreen.css';
 import SideBarButton from './UserSideBar/SideBarButton/SideBarButton';
 
-function UserHomeScreen( props) {
+function UserHomeScreen({userPlantData}) {
 
-    const[userPlants, setUserPlants] = useState(); 
     const [selectedScreen, setSelectedScreen] = useState("My Plants");
     const sideBarOptions = ["My Plants", "My Locations", "Explore Learn More Plants"]
 
@@ -19,7 +18,7 @@ function UserHomeScreen( props) {
 const renderUserScreen = () => {
   switch (selectedScreen.toLowerCase()){
     case 'my plants':
-      return <PlantTileDeck listOfPlants={props.userAccountInfo.plants}/>
+      return <PlantTileDeck userPlantData={userPlantData}/>
       default:
         return <p> developing</p>
   }
@@ -27,7 +26,7 @@ const renderUserScreen = () => {
 
   return (
     <div className="user-home-screen-container">
-      <h1 className='user-home-screen-welcome-title'>Welcome Back, {props.userAccountInfo.name}</h1>
+      <h1 className='user-home-screen-welcome-title'>Welcome Back, TestUser</h1>
       <div className='user-home-screen-content'>
         <div className="user-sidebar">
           {renderUserSideBar()}
