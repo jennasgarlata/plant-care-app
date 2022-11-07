@@ -7,7 +7,7 @@ import SideBarButton from './UserSideBar/SideBarButton/SideBarButton';
 function UserHomeScreen({userPlantData}) {
 
     const [selectedScreen, setSelectedScreen] = useState("My Plants");
-    const sideBarOptions = ["My Plants", "My Locations", "Explore Learn More Plants"]
+    const sideBarOptions = ["My Plants", "My Locations",  "Discover More Plants"]
 
     const renderUserSideBar = () => {
       let sideBarButtons = [];

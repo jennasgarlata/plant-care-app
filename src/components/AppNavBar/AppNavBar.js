@@ -1,71 +1,69 @@
-import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
+import {useState} from 'react'; 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { green } from '@mui/material/colors';
+import FormDialogBox from './FormDialogBox';
 
 
-export default function PrimarySearchAppBar({setSelectedPage}) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+export default function AppNavBar({setSelectedPage}) {
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [formSelected, setFormSelected] = useState("");
 
   const isMenuOpen = Boolean(anchorEl);
+  const menuId = 'primary-search-account-menu';
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMenuClose = (event) => {
+  const handleAppBarMenuClose = (event) => {
     setSelectedPage(event.target.innerText);
     setAnchorEl(null);
   };
 
-  const menuId = 'primary-search-account-menu';
+  const handleCloseForm = () => {
+    setOpen(false);
+    setAnchorEl(null);
+
+  }
+  const handleOpenForm = (type) => {
+    setFormSelected(type)
+    setOpen(true);
+  };
+
+  const renderDialogBox = open === true ? <FormDialogBox type={formSelected} open={open} handleCloseForm={handleCloseForm} setSelectedPage={setSelectedPage}/> : null;
+
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: 'top',
-        horizontal: 'right',
-      }}
+        horizontal: 'right'}}
       id={menuId}
       keepMounted
       transformOrigin={{
         vertical: 'top',
-        horizontal: 'right',
-      }}
+        horizontal: 'right'}}
       open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={(e) => handleMenuClose(e)}>Login/Sign Up</MenuItem>
+      onClose={handleAppBarMenuClose}>
+      <MenuItem onClick={(e) => handleOpenForm("login")}>Log in / Sign up</MenuItem>
+      {/* <MenuItem onClick={(e) => handleOpenForm("signUp")}>Sign Up</MenuItem> */}
+      {renderDialogBox}
     </Menu>
   );
 
   return (
     <Box sx={{ flexGrow: 1}}>
-      <AppBar position="static">
+      <AppBar  sx={{bgcolor:"#014421"}}position="static">
         <Toolbar>
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton> */}
           <Typography
             variant="h6"
             noWrap

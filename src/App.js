@@ -3,7 +3,7 @@ import axios from 'axios';
 import './CSS/App.css';
 import  Home from'./components/Home/Home';
 import  UserHomeScreen from'./components/UserHomeScreen/UserHomeScreen';
-import AppBar from './components/AppBar/AppBar';
+import AppBar from './components/AppNavBar/AppNavBar';
 
 function App() {
 
