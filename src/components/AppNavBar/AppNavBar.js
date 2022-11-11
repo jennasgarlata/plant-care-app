@@ -8,7 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import FormDialogBox from './FormDialogBox';
+import FormDialogBox from './FormDialogBox/FormDialogBox';
 
 
 export default function AppNavBar({setSelectedPage}) {

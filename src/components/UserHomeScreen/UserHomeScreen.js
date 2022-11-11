@@ -3,24 +3,30 @@ import PlantTileDeck from './PlantTileDeck/PlantTileDeck';
 import UserSidebar from './UserSideBar/UserSidebar';
 import '../../CSS/UserHomeScreen.css';
 import SideBarButton from './UserSideBar/SideBarButton/SideBarButton';
+import LocationsTileDeck from './LocationsTileDeck/LocationsTileDeck';
+import ExplorePlants from './ExplorePlants/ExplorePlants';
+import * as Constants from '../../components/Utils/Constants';
 
 function UserHomeScreen({userPlantData}) {
 
-    const [selectedScreen, setSelectedScreen] = useState("My Plants");
-    const sideBarOptions = ["My Plants", "My Locations",  "Discover More Plants"]
+    const [selectedScreen, setSelectedScreen] = useState(Constants.PLANTS_PAGE);
 
     const renderUserSideBar = () => {
       let sideBarButtons = [];
-      {sideBarOptions.map((sideBarName, index)=> sideBarButtons.push(<SideBarButton sideBarName={sideBarName} setSelectedScreen={setSelectedScreen}/>))}
+      {Constants.SIDE_BAR_OPTIONS.map((pageName, index)=> sideBarButtons.push(<SideBarButton key={index} sideBarName={pageName} setSelectedScreen={setSelectedScreen}/>))}
       return sideBarButtons;
     }
 
 const renderUserScreen = () => {
-  switch (selectedScreen.toLowerCase()){
-    case 'my plants':
+  switch (selectedScreen){
+    case Constants.PLANTS_PAGE:
       return <PlantTileDeck userPlantData={userPlantData}/>
+      case Constants.LOCATIONS_PAGE:
+      return <LocationsTileDeck/>
+      case Constants.EXPLORE_PLANTS_PAGE:
+      return <ExplorePlants/>
       default:
-        return <p> developing</p>
+        return <p> Coming Soon...</p>
   }
 }
 
