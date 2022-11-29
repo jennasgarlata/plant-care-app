@@ -4,10 +4,11 @@ import UserSidebar from './UserSideBar/UserSidebar';
 import '../../CSS/UserHomeScreen.css';
 import SideBarButton from './UserSideBar/SideBarButton/SideBarButton';
 import LocationsTileDeck from './LocationsTileDeck/LocationsTileDeck';
-import ExplorePlants from './ExplorePlants/ExplorePlants';
+import ExplorePlants from './ExplorePlantsDeck/ExplorePlantsDeck';
 import * as Constants from '../../components/Utils/Constants';
 
-function UserHomeScreen({userPlantData}) {
+
+function UserHomeScreen({userPlantData, setUserPlantData, allPlants, nameText, userId, getUserPlantData}) {
 
     const [selectedScreen, setSelectedScreen] = useState(Constants.PLANTS_PAGE);
 
@@ -20,11 +21,11 @@ function UserHomeScreen({userPlantData}) {
 const renderUserScreen = () => {
   switch (selectedScreen){
     case Constants.PLANTS_PAGE:
-      return <PlantTileDeck userPlantData={userPlantData}/>
+      return <PlantTileDeck userPlantData={userPlantData} setUserPlantData={setUserPlantData} allPlants={allPlants} userId={userId} getUserPlantData={getUserPlantData}/>
       case Constants.LOCATIONS_PAGE:
-      return <LocationsTileDeck/>
+      return <LocationsTileDeck userId={userId}/>
       case Constants.EXPLORE_PLANTS_PAGE:
-      return <ExplorePlants/>
+      return <ExplorePlants allPlants={allPlants} />
       default:
         return <p> Coming Soon...</p>
   }
@@ -32,7 +33,7 @@ const renderUserScreen = () => {
 
   return (
     <div className="user-home-screen-container">
-      <h1 className='user-home-screen-welcome-title'>Welcome Back, TestUser</h1>
+      <h1 className='user-home-screen-welcome-title'>Welcome Back, {nameText}</h1>
       <div className='user-home-screen-content'>
         <div className="user-sidebar">
           {renderUserSideBar()}

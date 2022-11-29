@@ -5,9 +5,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import locationImage from '../../Assets/homecard-locationimage.jpg';
-import plantImage from '../../Assets/homecard-plantimage.jpg';
-import careImage from '../../Assets/homecard-careimage.jpg';
+import locationImage from '../../../Assets/homecard-locationimage.jpg';
+import plantImage from '../../../Assets/homecard-plantimage.jpg';
+import careImage from '../../../Assets/homecard-careimage.jpg';
 
 
 

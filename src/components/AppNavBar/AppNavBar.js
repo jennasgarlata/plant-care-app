@@ -11,7 +11,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import FormDialogBox from './FormDialogBox/FormDialogBox';
 
 
-export default function AppNavBar({setSelectedPage}) {
+export default function AppNavBar({setSelectedPage, setUserId, setNameText}) {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
@@ -39,7 +39,7 @@ export default function AppNavBar({setSelectedPage}) {
     setOpen(true);
   };
 
-  const renderDialogBox = open === true ? <FormDialogBox type={formSelected} open={open} handleCloseForm={handleCloseForm} setSelectedPage={setSelectedPage}/> : null;
+  const renderDialogBox = open === true ? <FormDialogBox type={formSelected} open={open} handleCloseForm={handleCloseForm} setSelectedPage={setSelectedPage} setUserId={setUserId} setNameText={setNameText}/> : null;
 
   const renderMenu = (
     <Menu

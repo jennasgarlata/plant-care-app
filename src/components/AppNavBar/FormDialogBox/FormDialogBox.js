@@ -7,9 +7,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Stack from '@mui/material/Stack';
+import Tooltip from '@mui/material/Tooltip';
+import axios from 'axios';
 
-
-export default function FormDialogBox({type, open, handleCloseForm, setSelectedPage}) {
+export default function LoginSignUpForm({type, open, handleCloseForm, setSelectedPage, setUserId, setNameText}) {
 
   const [selectedForm, setSelectedForm] = useState(type);
   const [emailAddress, setEmailAddress] = useState("");
@@ -17,6 +18,9 @@ export default function FormDialogBox({type, open, handleCloseForm, setSelectedP
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [userName, setUserName] = useState("");
+  const [location, setLocation] = useState("");
+
 
   let confirmPasswordError = confirmPassword != ""? confirmPassword === password? "" : "error": ""
   let confirmPasswordHelper = confirmPasswordError !== "error" ? "" : "Passwords do not match"
@@ -28,14 +32,15 @@ export default function FormDialogBox({type, open, handleCloseForm, setSelectedP
 
     if (confirmPasswordError === "error" || emailError ==="error"){
         disabledButton = "disabled"
-    }else if ( selectedForm.toLowerCase() ==="signup" && 
+    }
+    else if ( selectedForm.toLowerCase() ==="signup" && 
                 (firstName ==="" || lastName ==="" || 
                 emailAddress ==="" || password==="" || 
                 confirmPassword===""))
     {
         disabledButton = "disabled"
 
-    } else if (selectedForm.toLowerCase() ==="login" && (emailAddress ==="" || password==="")){
+    } else if (selectedForm.toLowerCase() ==="login" && (userName ==="" || password==="")){
         disabledButton = "disabled"
     }
 
@@ -43,10 +48,37 @@ export default function FormDialogBox({type, open, handleCloseForm, setSelectedP
     handleCloseForm();
   };
 
+
   const handleSubmit = () => {
-    handleCloseForm();
-    setSelectedPage("loggedIn")
-  };
+        if (selectedForm === "login")
+        {
+            const loginAPI = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/Login?password=${password}&userName=${userName}`
+            axios.get(loginAPI)
+            .then(res => {
+                console.log(res.data)
+                setUserId(res.data.userid);
+                setNameText(res.data.name);
+
+            }
+            )
+            setSelectedPage("loggedIn")
+            handleClose();
+        }
+        else 
+        {
+            const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/CreateUser?location=${location}&name=${firstName + " " + lastName}&password=${password}t&userName=${userName}`
+            axios.get(api)
+            .then(res => {
+                console.log(res.data)
+                setUserId(res.data.userid);
+                setNameText(firstName);
+            }
+            )
+            setSelectedPage("loggedIn")
+            handleClose();
+
+        };
+    }
 
   const handleChange = (e, fieldType) => {
     switch (fieldType.toLowerCase()){
@@ -64,6 +96,12 @@ export default function FormDialogBox({type, open, handleCloseForm, setSelectedP
             break;
         case "confirmpassword":
             setConfirmPassword(e.target.value);
+            break;
+        case "username":
+            setUserName(e.target.value);
+            break;
+        case "location":
+            setLocation(e.target.value);
             break;
         default:
             break;
@@ -89,11 +127,8 @@ export default function FormDialogBox({type, open, handleCloseForm, setSelectedP
             <TextField
                 autoFocus
                 margin="dense"
-                label="Email Address"
-                helperText={emailHelper}
-                error={emailError}
-                value={emailAddress}
-                onChange={(e)=> {handleChange(e, "emailAddress")}}
+                label="User Name"
+                onChange={(e)=> {handleChange(e, "username")}}
                 type="text"
                 fullWidth
                 variant="standard"/>
@@ -136,6 +171,15 @@ export default function FormDialogBox({type, open, handleCloseForm, setSelectedP
                     type="text"
                     fullWidth
                     variant="standard"/>
+                     <TextField
+                    autoFocus
+                    margin="dense"
+                    label="User Name"
+                    helperText={emailHelper}
+                    onChange={(e)=> {handleChange(e, "username")}}
+                    type="text"
+                    fullWidth
+                    variant="standard"/>
                 <TextField
                     autoFocus
                     margin="dense"
@@ -167,7 +211,19 @@ export default function FormDialogBox({type, open, handleCloseForm, setSelectedP
                     type="text"
                     fullWidth
                     variant="standard"/>
+                    <Tooltip title="Please enter a zip code to continue">
+                    <TextField
+                    autoFocus
+                    margin="dense"
+                    label="Location"
+                    value={location}
+                    onChange={(e)=> {handleChange(e, "location")}}
+                    type="text"
+                    fullWidth
+                    variant="standard"/>
+                    </Tooltip>
                 </DialogContent>
+                
                 break;
         default: 
         break;

@@ -3,35 +3,55 @@ import axios from 'axios';
 import './CSS/App.css';
 import  Home from'./components/Home/Home';
 import  UserHomeScreen from'./components/UserHomeScreen/UserHomeScreen';
-import AppBar from './components/AppNavBar/AppNavBar';
+import AppNavBar from './components/AppNavBar/AppNavBar';
+import { ContentPasteSearchOutlined } from '@mui/icons-material';
 
 function App() {
 
+  const [userId, setUserId] = useState("")
+  const [nameText, setNameText] = useState("");
   const [userPlantData, setUserPlantData] = useState({});
-
   const [selectedPage, setSelectedPage] = useState("");
+  const [allPlants, setallPlants] = useState();
 
     useEffect(() => {
+      getAllPlantsData();
       getUserPlantData();
-    }, []);
+    }, [userId]);
   
-    const getUserPlantData = () => {
-      const api = 'https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/GetPlantsForUserId?userId=2';
+    const getAllPlantsData = () => {
+      const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/GetAllPlantTypes`;
       axios.get(api)
         .then(res => {
           console.log(res)
-          setUserPlantData(res.data);
+          setallPlants(res.data);
         }
         )
       };
-  
-  const showLoginButton = selectedPage === "" ? <button onClick={() => setSelectedPage("loggedIn")}>Log in</button> : null;
-  const renderApplication = selectedPage === "" ? <Home /> : <UserHomeScreen userPlantData={userPlantData}/>
+
+      const getUserPlantData = () => {
+        console.log(`fetch user plant ${userId}`)
+        const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/GetPlantsForUserId?userid=${userId}`;
+        axios.get(api)
+          .then(res => {
+            console.log("userplant...")
+
+            console.log(res.data)
+            setUserPlantData(res.data);
+          }
+          )
+        };
+
+ 
+  const renderApplication = selectedPage === "" ? <Home /> : <UserHomeScreen userPlantData={userPlantData} setUserPlantData={setUserPlantData} allPlants={allPlants} userId={userId} nameText={nameText} getUserPlantData={getUserPlantData}  />
   
   
   return (
     <div className="App">
-      <AppBar setSelectedPage={setSelectedPage}/>
+      <AppNavBar 
+      setSelectedPage={setSelectedPage}
+      setUserId={setUserId}
+      setNameText={setNameText}/>
       {renderApplication}
     </div>
   );

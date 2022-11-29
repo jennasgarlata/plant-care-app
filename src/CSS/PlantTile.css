@@ -1,7 +1,7 @@
 .plant-tile-deck{
     display:flex;
     flex-wrap: wrap;
-    width: 170%;
+    width: 100%;
     height:auto;
 }
 

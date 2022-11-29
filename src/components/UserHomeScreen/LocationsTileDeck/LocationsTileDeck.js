@@ -4,23 +4,44 @@ import AddIcon from '@mui/icons-material/Add';
 import * as Constants from '../../../components/Utils/Constants';
 import NewLocationForm from "./NewLocationForm/NewLocationForm";
 import LocationTile from "./LocationTile/LocationTile";
+import axios from 'axios';
 
 
-const LocationsTileDeck= (props) => {
+const LocationsTileDeck= ({userId}) => {
 
     const [showNewPlantForm, setShowNewPlantForm] = useState(false);
+    const [userLocations, setUserLocations] = useState([]);
 
-    const renderPlantTiles = Constants.TEST_LOCATIONS?.map(location=> <LocationTile location={location}/> )
-    const renderNewPlantForm = showNewPlantForm === true? 
-          <NewLocationForm showNewPlantForm={showNewPlantForm} setShowNewPlantForm={setShowNewPlantForm}/> 
-          : null;
+    useEffect(() => {
+      getUserLocations();
+    }, [userId]);
+  
+    const getUserLocations = () => {
+      const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/GetPlantLocationsForUserId?userid=${userId}`;
+      axios.get(api)
+        .then(res => {
+          console.log(`locations: ${res.data}`)
+          setUserLocations(res.data);
+        }
+        )
+      };
+
+
+    const renderPlantTiles = userLocations?.map(location=> <LocationTile location={location}/> )
+    const locationsMessage = userLocations.length ==0? "Please add plants to see locations here" : null
+    // const renderNewPlantForm = showNewPlantForm === true? 
+    //       <NewLocationForm showNewPlantForm={showNewPlantForm} setShowNewPlantForm={setShowNewPlantForm}/> 
+    //       : null;
 
 
   return (
-    <div className='plant-tile-deck'>
-    <Button variant="contained" endIcon={<AddIcon />} onClick={(e)=>{setShowNewPlantForm(true)}}>Add Location</Button>
-    {renderNewPlantForm}
-    {renderPlantTiles}
+    <div>
+        {/* <Button variant="contained" endIcon={<AddIcon />} onClick={(e)=>{setShowNewPlantForm(true)}}>Add Location</Button> */}
+        {locationsMessage}
+        <div className='plant-tile-deck'>
+            {/* {renderNewPlantForm} */}
+            {renderPlantTiles}
+        </div>
     </div> 
   )
 };

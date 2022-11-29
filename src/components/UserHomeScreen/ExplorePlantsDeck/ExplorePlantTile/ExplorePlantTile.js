@@ -11,8 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import tempImage from '../../../../Assets/homecard-plantimage.jpg';
-import axios from 'axios';
+import tempImage from '../../../../Assets/homecard-plantimage.jpg'
 import '../../../../CSS/PlantTile.css';
 
 const ExpandMore = styled((props) => {
@@ -26,37 +25,18 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function PlantTile({plant}) {
+export default function ExplorePlantTile({plant}) {
   const [expanded, setExpanded] = useState(false);
 
-  console.log (`plant ${plant}`)
   //TEMP variables 
   let altText ="temp text";
   let image = tempImage;
+  let plantLocation = "kitchen";
+  let upcomingCare = "water on 11/2/2022";
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
-  const deletePlant = () => {
-    const plantID = 1;
-    const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/DeleteUserPlant?userPlantId=${plantID}`;
-    axios.get(api)
-      .then(res => {
-        console.log(res)
-      }
-      )
-    };
-
-  const markPlantWatered = () => {
-    const plantID = 1;
-    const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/WaterUserPlant?userPlantId=${plantID}`;
-    axios.get(api)
-      .then(res => {
-        console.log(res)
-      }
-      )
-    };
 
   return (
     <div className='plant-tile'>
@@ -66,8 +46,8 @@ export default function PlantTile({plant}) {
               <Avatar alt={altText} src={image} />
               
           }
-          title={plant["plant-name"]}
-          subheader={plant["plant-location"]}
+          title={plant["generic-name"]}
+          subheader={plant["scientific-name"]}
         />
         <CardMedia
           component="img"
@@ -77,7 +57,7 @@ export default function PlantTile({plant}) {
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-          Next Scheduled Watering: {plant["next-watering"]}
+            Expand to learn more about this plant
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -91,22 +71,20 @@ export default function PlantTile({plant}) {
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography sx={{fontSize:"35px"}} paragraph>Generic Name:</Typography>
+            <Typography sx={{fontSize:"20px"}} paragraph>Generic Name:</Typography>
             <Typography paragraph> {plant["generic-name"]} </Typography>
-            <Typography sx={{fontSize:"35px"}} paragraph>Scientific Name:</Typography>
+            <Typography sx={{fontSize:"20px"}} paragraph>Scientific Name:</Typography>
             <Typography paragraph> {plant["scientific-name"]} </Typography>
-            <Typography sx={{fontSize:"35px"}} paragraph>Type of Plant:</Typography>
+            <Typography sx={{fontSize:"20px"}} paragraph>Type of Plant:</Typography>
             <Typography paragraph>{plant.type} </Typography>
-            <Typography sx={{fontSize:"35px"}} paragraph>Direction of Window:</Typography>
+            <Typography sx={{fontSize:"20px"}} paragraph>Direction of Window:</Typography>
             <Typography paragraph> {plant["window-facing"]} </Typography>
-            <Typography sx={{fontSize:"35px"}}  paragraph>Water Needs:</Typography>
+            <Typography sx={{fontSize:"20px"}}  paragraph>Water Needs:</Typography>
             <Typography paragraph>{plant.water} </Typography>
-            <Typography sx={{fontSize:"35px"}} paragraph>Sun Needs:</Typography>
+            <Typography sx={{fontSize:"20px"}} paragraph>Sun Needs:</Typography>
             <Typography paragraph> {plant.sun} </Typography>
-            <Typography sx={{fontSize:"35px"}} paragraph>Soil Needs:</Typography>
+            <Typography sx={{fontSize:"20px"}} paragraph>Soil Needs:</Typography>
             <Typography paragraph> {plant.soil} </Typography>
-            <Button onClick={(e)=>{markPlantWatered()}}> Water Plant</Button>
-            <Button onClick={(e)=>{deletePlant()}}> Delete Plant</Button>
           </CardContent>
         </Collapse>
       </Card>
