@@ -14,11 +14,12 @@ import Select from '@mui/material/Select';
 import axios from 'axios';
 import * as Constants from '../../../Utils/Constants';
 
-export default function NewPlantForm({showNewPlantForm, setShowNewPlantForm, setUserPlantData, allPlants, userId}) {
+export default function NewPlantForm({showNewPlantForm, setShowNewPlantForm, setUserPlantData, 
+                                      allPlants, userId}) 
+{
 
   const [plantName, setPlantName] = useState()
   const [plantType, setplantType] = useState();
-  const [lastWateredDate, setLastWateredDate] = useState();
   const [locationOfPlant, setlocationOfPlant] = useState();
   const [directionOfWindow, setdirectionOfWindow] = useState();
 
@@ -27,30 +28,23 @@ export default function NewPlantForm({showNewPlantForm, setShowNewPlantForm, set
     const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/GetPlantsForUserId?userid=${userId}`;
     axios.get(api)
       .then(res => {
-        console.log("userplant...")
-
-        console.log(res.data)
-        setUserPlantData(res.data);
-      }
+        setUserPlantData(res.data);}
       )
     };
 
   const handleSubmit = () => {
     const addPlantAPI = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/AddUserPlant?
-                          lastWatered=${lastWateredDate}
                           &plantDataId=${plantType}
                           &plantLocation=${locationOfPlant}
                           &plantName=${plantName}
                           &userid=${userId}
-                          &windowLocation=${directionOfWindow}`
-            console.log(addPlantAPI)
-            axios.get(addPlantAPI)
-            .then(res => {
-                console.log(res.data)
-            }
-            )
-           handleClose()
-           getUserPlantData()
+                          &windowFacing=${directionOfWindow}`
+    axios.get(addPlantAPI)
+    .then(res => {
+        console.log(res.data)}
+    )
+    handleClose()
+    getUserPlantData()
   }
 
   const handleChange = (e, fieldType) => {
@@ -67,13 +61,12 @@ export default function NewPlantForm({showNewPlantForm, setShowNewPlantForm, set
         case Constants.PLANT_WINDOW_DIRECTION_FIELD:
             setdirectionOfWindow(e.target.value);
             break;
-        case Constants.LAST_WATERED:
-        setLastWateredDate(e.target.value);
         break;
         default:
             break;
     }
   };
+
   const handleClose = () => {
     setShowNewPlantForm(false);
   };
@@ -81,7 +74,7 @@ export default function NewPlantForm({showNewPlantForm, setShowNewPlantForm, set
   return (
     <div>
       <Dialog open={showNewPlantForm} onClose={handleClose}>
-        <DialogTitle>New Plant</DialogTitle>
+        <DialogTitle>Add A New Plant</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Tell us about your new plant!
@@ -95,19 +88,7 @@ export default function NewPlantForm({showNewPlantForm, setShowNewPlantForm, set
             value ={plantName}
             onChange={(e)=>{handleChange(e, Constants.PLANT_NAME_FIELD)}}
             fullWidth
-            variant="standard"
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label={Constants.LAST_WATERED}
-            type="text"
-            value ={lastWateredDate}
-            onChange={(e)=>{handleChange(e, Constants.LAST_WATERED)}}
-            fullWidth
-            variant="standard"
-          />
+            variant="standard"/>
           <TextField
             autoFocus
             margin="dense"
@@ -117,14 +98,11 @@ export default function NewPlantForm({showNewPlantForm, setShowNewPlantForm, set
             value ={locationOfPlant}
             onChange={(e)=>{handleChange(e, Constants.PLANT_LOCATION_FIELD)}}
             fullWidth
-            variant="standard"
-          />
+            variant="standard"/>
           <Box sx={{ minWidth: 120,  margin:"2%"}}>
             <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Type of Plant</InputLabel>
+            <InputLabel>Type of Plant</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
                 value={plantType}
                 onChange={(e)=>{handleChange(e,Constants.PLANT_TYPE_FIELD)}}
                 label={Constants.PLANT_TYPE_FIELD}>
@@ -134,10 +112,8 @@ export default function NewPlantForm({showNewPlantForm, setShowNewPlantForm, set
           </Box>
           <Box sx={{ minWidth: 120, margin:"2%"}}>
             <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Direction of Window</InputLabel>
+            <InputLabel>Direction of Window</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
                 value={directionOfWindow}
                 onChange={(e)=>{handleChange(e,Constants.PLANT_WINDOW_DIRECTION_FIELD)}}
                 label={Constants.PLANT_WINDOW_DIRECTION_FIELD}>

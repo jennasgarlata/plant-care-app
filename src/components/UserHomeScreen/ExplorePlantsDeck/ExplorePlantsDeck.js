@@ -10,7 +10,7 @@ const ExplorePlantsDeck= ({allPlants}) => {
 
   return (
     <div>
-        <div className='plant-tile-deck'>
+        <div className='tile-deck'>
             {renderAllPlants}
         </div>
     </div> 

@@ -13,8 +13,9 @@ import Button from '@mui/material/Button';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import tempImage from '../../../../Assets/homecard-plantimage.jpg';
 import axios from 'axios';
-import '../../../../CSS/PlantTile.css';
+import '../../../../CSS/Tile.css';
 
+// can we add different plant pics
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -26,10 +27,9 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function PlantTile({plant}) {
+export default function PlantTile({plant, userId, setUserPlantData, setUserLocations}) {
   const [expanded, setExpanded] = useState(false);
 
-  console.log (`plant ${plant}`)
   //TEMP variables 
   let altText ="temp text";
   let image = tempImage;
@@ -38,22 +38,43 @@ export default function PlantTile({plant}) {
     setExpanded(!expanded);
   };
 
-  const deletePlant = () => {
-    const plantID = 1;
-    const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/DeleteUserPlant?userPlantId=${plantID}`;
+  const getUserPlantData = () => {
+    console.log(`fetch user plant ${userId}`)
+    const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/GetPlantsForUserId?userid=${userId}`;
     axios.get(api)
       .then(res => {
-        console.log(res)
+        console.log("userplant...")
+        console.log(res.data)
+        setUserPlantData(res.data);
+      }
+      )
+    };
+
+    const getUserLocations = () => {
+      const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/GetPlantLocationsForUserId?userid=${userId}`;
+      axios.get(api)
+        .then(res => {
+          setUserLocations(res.data);}
+        )
+      };
+
+  const deletePlant = () => {
+    const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/DeleteUserPlant?userPlantId=${plant["user-plant-id"]}`;
+    axios.get(api)
+      .then(res => {
+        console.log(`plant deleted ${res}`)
+        getUserPlantData()
+        getUserLocations()
       }
       )
     };
 
   const markPlantWatered = () => {
-    const plantID = 1;
-    const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/WaterUserPlant?userPlantId=${plantID}`;
+    const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/WaterUserPlant?userPlantId=${plant["user-plant-id"]}`;
     axios.get(api)
       .then(res => {
-        console.log(res)
+        console.log(`plant watered ${res}`)
+        getUserPlantData();
       }
       )
     };
@@ -79,6 +100,8 @@ export default function PlantTile({plant}) {
           <Typography variant="body2" color="text.secondary">
           Next Scheduled Watering: {plant["next-watering"]}
           </Typography>
+          <Button onClick={(e)=>{markPlantWatered()}}> Water Plant</Button>
+          <Button onClick={(e)=>{deletePlant()}}> Delete Plant</Button>
         </CardContent>
         <CardActions disableSpacing>
           <ExpandMore
@@ -105,8 +128,6 @@ export default function PlantTile({plant}) {
             <Typography paragraph> {plant.sun} </Typography>
             <Typography sx={{fontSize:"35px"}} paragraph>Soil Needs:</Typography>
             <Typography paragraph> {plant.soil} </Typography>
-            <Button onClick={(e)=>{markPlantWatered()}}> Water Plant</Button>
-            <Button onClick={(e)=>{deletePlant()}}> Delete Plant</Button>
           </CardContent>
         </Collapse>
       </Card>

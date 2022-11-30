@@ -13,7 +13,13 @@ export const LAST_WATERED = "Last Watered";
 
 export const DIRECTION_OF_WINDOW = ["N", "NE", "NW", "E","S", "SE", "SW","W"]
 
-// export const MY_PLANTS = 'My Plants';
+export const KITCHEN = "KITCHEN"
+export const BEDROOM = "BEDROOM"
+export const GUEST_ROOM = "GUEST ROOM"
+export const DINING_ROOM = "DINING ROOM"
+export const LIVING_ROOM = "LIVING ROOM"
+export const BATHROOM = "BATHROOM"
+
 
 
 /* TEST DATA */ 

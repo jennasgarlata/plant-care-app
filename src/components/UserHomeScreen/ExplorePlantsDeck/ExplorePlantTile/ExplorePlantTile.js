@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import tempImage from '../../../../Assets/homecard-plantimage.jpg'
-import '../../../../CSS/PlantTile.css';
+import '../../../../CSS/Tile.css';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;

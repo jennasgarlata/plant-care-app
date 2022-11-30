@@ -138,7 +138,7 @@ export default function LoginSignUpForm({type, open, handleCloseForm, setSelecte
                 label="Password"
                 value={password}
                 onChange={(e)=> {handleChange(e, "password")}}
-                type="text"
+                type="password"
                 fullWidth
                 variant="standard"/>
             </DialogContent>
@@ -197,7 +197,7 @@ export default function LoginSignUpForm({type, open, handleCloseForm, setSelecte
                     label="Password"
                     value={password}
                     onChange={(e)=> {handleChange(e, "password")}}
-                    type="text"
+                    type="password"
                     fullWidth
                     variant="standard"/>
                 <TextField
@@ -208,7 +208,7 @@ export default function LoginSignUpForm({type, open, handleCloseForm, setSelecte
                     helperText={confirmPasswordHelper}
                     error={confirmPasswordError}
                     onChange={(e)=> {handleChange(e, "confirmpassword")}}
-                    type="text"
+                    type="password"
                     fullWidth
                     variant="standard"/>
                     <Tooltip title="Please enter a zip code to continue">
