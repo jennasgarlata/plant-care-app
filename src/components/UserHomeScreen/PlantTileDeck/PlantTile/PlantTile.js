@@ -12,8 +12,31 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import tempImage from '../../../../Assets/homecard-plantimage.jpg';
+import Divider from '@mui/material/Divider';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
+import ScienceIcon from '@mui/icons-material/Biotech';
+import GrassIcon from '@mui/icons-material/Grass';
+import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
+import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
+import FontDownloadOutlinedIcon from '@mui/icons-material/FontDownloadOutlined';
+import ShowerOutlinedIcon from '@mui/icons-material/ShowerOutlined';
+import MergeTypeOutlinedIcon from '@mui/icons-material/MergeTypeOutlined';
+import FiddleImage from '../../../../Assets/fiddleFig.jpg'
+import MoneyImage from '../../../../Assets/moneyPlant.jpg'
+import MonsteraImage from '../../../../Assets/monstera.jpg'
+import AloeImage from '../../../../Assets/aloeVera.jpg'
+import UmbrellaImage from '../../../../Assets/umbrellaPlant.jpg'
+import SpiderImage from '../../../../Assets/spiderPlant.jpg'
+import MotherImage from '../../../../Assets/motherTongue.jpg'
+import MarbleImage from '../../../../Assets/marbleQueenPothos.jpg'
+import NeonImage from '../../../../Assets/neonPothos.jpg'
+import GoldenImage from '../../../../Assets/goldenPothos.jpg'
+import SatinImage from '../../../../Assets/satinPothos.jpg'
 import axios from 'axios';
+import * as Constants from'../../../Utils/Constants'
 import '../../../../CSS/Tile.css';
+import { UmbrellaOutlined } from '@mui/icons-material';
 
 // can we add different plant pics
 const ExpandMore = styled((props) => {
@@ -30,9 +53,114 @@ const ExpandMore = styled((props) => {
 export default function PlantTile({plant, userId, setUserPlantData, setUserLocations}) {
   const [expanded, setExpanded] = useState(false);
 
-  //TEMP variables 
-  let altText ="temp text";
-  let image = tempImage;
+  let cardMediaMarkup;
+  let cardAvatar;
+
+  switch (plant["generic-name"].toUpperCase().trim()){
+    case Constants.FIDDLE_FIG: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={FiddleImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={FiddleImage} />
+    break;
+    case Constants.MONSTERA: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={MonsteraImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={MonsteraImage} />
+    break;
+    case Constants.MONEY_PLANT: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={MoneyImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={MoneyImage} />
+    break;
+    case Constants.ALOE_VERA: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={AloeImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={AloeImage} />
+    break;
+    case Constants.UMBRELLA_PLANT: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={UmbrellaImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={UmbrellaImage} />
+    break;
+    case Constants.SPIDER_PLANT: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={SpiderImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={SpiderImage} />
+    break;
+    case Constants.GOLDEN_POTHOS: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={GoldenImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={GoldenImage} />
+    break;
+    case Constants.MARBLE_QUEEN_POTHOS: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={MarbleImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={MarbleImage} />
+    break;
+    case Constants.NEON_POTHOS: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={NeonImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={NeonImage} />
+    break;
+    case Constants.SATIN_POTHOS : 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={SatinImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={SatinImage} />
+    break;
+    case Constants.MOTHERS_TONGUE : 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={MotherImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={MotherImage} />
+    break;
+    default:
+      cardMediaMarkup = <CardMedia
+              component="img"
+              height="194"
+              image={tempImage}
+              alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={tempImage} />
+    break;
+  }
+
+  let cardMedia =  <div>
+                    <CardHeader
+                        avatar={cardAvatar}
+                        title={plant["plant-name"]} />
+                    {cardMediaMarkup}
+                  </div>;
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -43,8 +171,6 @@ export default function PlantTile({plant, userId, setUserPlantData, setUserLocat
     const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/GetPlantsForUserId?userid=${userId}`;
     axios.get(api)
       .then(res => {
-        console.log("userplant...")
-        console.log(res.data)
         setUserPlantData(res.data);
       }
       )
@@ -62,7 +188,6 @@ export default function PlantTile({plant, userId, setUserPlantData, setUserLocat
     const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/DeleteUserPlant?userPlantId=${plant["user-plant-id"]}`;
     axios.get(api)
       .then(res => {
-        console.log(`plant deleted ${res}`)
         getUserPlantData()
         getUserLocations()
       }
@@ -73,29 +198,18 @@ export default function PlantTile({plant, userId, setUserPlantData, setUserLocat
     const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/WaterUserPlant?userPlantId=${plant["user-plant-id"]}`;
     axios.get(api)
       .then(res => {
-        console.log(`plant watered ${res}`)
         getUserPlantData();
       }
       )
     };
 
+  
+
+
   return (
     <div className='plant-tile'>
       <Card sx={{ maxWidth: 345 }}>
-        <CardHeader
-          avatar={
-              <Avatar alt={altText} src={image} />
-              
-          }
-          title={plant["plant-name"]}
-          subheader={plant["plant-location"]}
-        />
-        <CardMedia
-          component="img"
-          height="194"
-          image={image}
-          alt={altText}
-        />
+        {cardMedia}
         <CardContent>
           <Typography variant="body2" color="text.secondary">
           Next Scheduled Watering: {plant["next-watering"]}
@@ -114,20 +228,54 @@ export default function PlantTile({plant, userId, setUserPlantData, setUserLocat
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography sx={{fontSize:"35px"}} paragraph>Generic Name:</Typography>
-            <Typography paragraph> {plant["generic-name"]} </Typography>
-            <Typography sx={{fontSize:"35px"}} paragraph>Scientific Name:</Typography>
-            <Typography paragraph> {plant["scientific-name"]} </Typography>
-            <Typography sx={{fontSize:"35px"}} paragraph>Type of Plant:</Typography>
-            <Typography paragraph>{plant.type} </Typography>
-            <Typography sx={{fontSize:"35px"}} paragraph>Direction of Window:</Typography>
-            <Typography paragraph> {plant["window-facing"]} </Typography>
-            <Typography sx={{fontSize:"35px"}}  paragraph>Water Needs:</Typography>
-            <Typography paragraph>{plant.water} </Typography>
-            <Typography sx={{fontSize:"35px"}} paragraph>Sun Needs:</Typography>
-            <Typography paragraph> {plant.sun} </Typography>
-            <Typography sx={{fontSize:"35px"}} paragraph>Soil Needs:</Typography>
-            <Typography paragraph> {plant.soil} </Typography>
+
+          <Stack direction="row" spacing={1}>
+            <Chip icon={<FontDownloadOutlinedIcon />} label="Generic Name"  />
+          </Stack>
+          <Typography paragraph>  {plant["generic-name"]} </Typography>
+          <Divider/>
+          <br></br>
+
+          <Stack direction="row" spacing={1}>
+            <Chip icon={<ScienceIcon />} label="Scientific Name" />
+          </Stack>
+          <Typography paragraph> {plant["scientific-name"]} </Typography>
+          <Divider/>
+          <br></br>
+
+          <Stack direction="row" spacing={1}>
+            <Chip icon={<MergeTypeOutlinedIcon />} label="Type of Plant" />
+          </Stack>
+          <Typography paragraph>{plant.type} </Typography>
+          <Divider/>
+          <br></br>
+
+          <Stack direction="row" spacing={1}>
+            <Chip icon={<ExploreOutlinedIcon />} label="Direction of Window" />
+          </Stack>
+          <Typography paragraph> {plant["window-facing"]} </Typography>
+          <Divider/>
+          <br></br>
+
+          <Stack direction="row" spacing={1}>
+            <Chip icon={<ShowerOutlinedIcon />} label="Water Needs" />
+          </Stack>
+          <Typography paragraph>{plant.water} </Typography>
+          <Divider/>
+          <br></br>
+
+          <Stack direction="row" spacing={1}>
+            <Chip icon={<WbSunnyOutlinedIcon />} label="Sun Needs" />
+          </Stack>
+          <Typography paragraph> {plant.sun} </Typography>
+          <Divider/>
+          <br></br>
+
+          <Stack direction="row" spacing={1}>
+            <Chip icon={<GrassIcon />} label="Soil Needs" />
+          </Stack>
+          <Typography paragraph> {plant.soil} </Typography>
+
           </CardContent>
         </Collapse>
       </Card>

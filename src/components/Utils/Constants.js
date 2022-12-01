@@ -20,6 +20,20 @@ export const DINING_ROOM = "DINING ROOM"
 export const LIVING_ROOM = "LIVING ROOM"
 export const BATHROOM = "BATHROOM"
 
+export const FIDDLE_FIG = "FIDDLE LEAF FIG";
+export const MONSTERA = 'MONSTERA';
+export const MONEY_PLANT = 'MONEY PLANT';
+export const ALOE_VERA = 'ALOE VERA';
+export const UMBRELLA_PLANT = 'UMBRELLA PLANT';
+export const SPIDER_PLANT = 'SPIDER PLANT';
+export const MOTHERS_TONGUE = "MOTHER-IN-LAW TONGUE";
+export const GOLDEN_POTHOS = "GOLDEN POTHOS";
+export const MARBLE_QUEEN_POTHOS = "MARBLE QUEEN POTHOS";
+export const NEON_POTHOS = "NEON POTHOS";
+export const SATIN_POTHOS = "SATIN POTHOS";
+
+
+
 
 
 /* TEST DATA */ 
