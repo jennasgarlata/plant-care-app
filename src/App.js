@@ -28,7 +28,8 @@ function App() {
         const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/GetAllPlantTypes`;
         axios.get(api)
           .then(res => {
-            setallPlants(res.data);}
+            var sortData = res.data.sort((a, b) => a["generic-name"].localeCompare(b["generic-name"]));
+            setallPlants(sortData);}
           )
       };
 

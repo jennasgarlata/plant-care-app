@@ -11,7 +11,21 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import tempImage from '../../../../Assets/homecard-plantimage.jpg'
+// import tempImage from '../../../../Assets/homecard-plantimage.jpg'
+import FiddleImage from '../../../../Assets/fiddleFig.jpg'
+import MoneyImage from '../../../../Assets/moneyPlant.jpg'
+import MonsteraImage from '../../../../Assets/monstera.jpg'
+import AloeImage from '../../../../Assets/aloeVera.jpg'
+import UmbrellaImage from '../../../../Assets/umbrellaPlant.jpg'
+import SpiderImage from '../../../../Assets/spiderPlant.jpg'
+import MotherImage from '../../../../Assets/motherTongue.jpg'
+import MarbleImage from '../../../../Assets/marbleQueenPothos.jpg'
+import NeonImage from '../../../../Assets/neonPothos.jpg'
+import GoldenImage from '../../../../Assets/goldenPothos.jpg'
+import SatinImage from '../../../../Assets/satinPothos.jpg'
+// import loadingImage from '../../../../Assets/plant_loading.gif'
+import mysteryIcon from '../../../../Assets/mysteryIcon.jpeg'
+import * as Constants from '../../../Utils/Constants'
 import '../../../../CSS/Tile.css';
 
 const ExpandMore = styled((props) => {
@@ -30,9 +44,120 @@ export default function ExplorePlantTile({plant}) {
 
   //TEMP variables 
   let altText ="temp text";
-  let image = tempImage;
+  let image = mysteryIcon;
   let plantLocation = "kitchen";
   let upcomingCare = "water on 11/2/2022";
+
+
+  let cardMediaMarkup;
+  let cardAvatar;
+
+  switch (plant["generic-name"].toUpperCase().trim()){
+    case Constants.FIDDLE_FIG: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={FiddleImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={FiddleImage} />
+    break;
+    case Constants.MONSTERA: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={MonsteraImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={MonsteraImage} />
+    break;
+    case Constants.MONEY_PLANT: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={MoneyImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={MoneyImage} />
+    break;
+    case Constants.ALOE_VERA: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={AloeImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={AloeImage} />
+    break;
+    case Constants.UMBRELLA_PLANT: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={UmbrellaImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={UmbrellaImage} />
+    break;
+    case Constants.SPIDER_PLANT: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={SpiderImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={SpiderImage} />
+    break;
+    case Constants.GOLDEN_POTHOS: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={GoldenImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={GoldenImage} />
+    break;
+    case Constants.MARBLE_QUEEN_POTHOS: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={MarbleImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={MarbleImage} />
+    break;
+    case Constants.NEON_POTHOS: 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={NeonImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={NeonImage} />
+    break;
+    case Constants.SATIN_POTHOS : 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={SatinImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={SatinImage} />
+    break;
+    case Constants.MOTHERS_TONGUE : 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={MotherImage}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={MotherImage} />
+    break;
+    default:
+      cardMediaMarkup = <CardMedia
+              component="img"
+              height="194"
+              image={mysteryIcon}
+              alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={mysteryIcon} />
+    break;
+  }
+
+  let cardMedia =  <div>
+                    <CardHeader
+                        avatar={cardAvatar}
+                        title={plant["plant-name"]} />
+                    {cardMediaMarkup}
+                  </div>;
+
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -41,20 +166,7 @@ export default function ExplorePlantTile({plant}) {
   return (
     <div className='plant-tile'>
       <Card sx={{ maxWidth: 345 }}>
-        <CardHeader
-          avatar={
-              <Avatar alt={altText} src={image} />
-              
-          }
-          title={plant["generic-name"]}
-          subheader={plant["scientific-name"]}
-        />
-        <CardMedia
-          component="img"
-          height="194"
-          image={image}
-          alt={altText}
-        />
+        {cardMedia}
         <CardContent>
           <Typography variant="body2" color="text.secondary">
             Expand to learn more about this plant

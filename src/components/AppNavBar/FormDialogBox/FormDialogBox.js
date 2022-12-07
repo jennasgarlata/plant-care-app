@@ -22,11 +22,14 @@ export default function LoginSignUpForm({type, open, handleCloseForm, setSelecte
   const [location, setLocation] = useState("");
 
 
-  let confirmPasswordError = confirmPassword != ""? confirmPassword === password? "" : "error": ""
-  let confirmPasswordHelper = confirmPasswordError !== "error" ? "" : "Passwords do not match"
+  let confirmPasswordError = confirmPassword != ""? confirmPassword === password? "" : "error": "";
+  let confirmPasswordHelper = confirmPasswordError !== "error" ? "" : "Passwords do not match";
 
   let emailError = emailAddress !== "" ? (emailAddress.includes("@")) ? "" : "error": ""
   let emailHelper = emailError !== "error"? "" : "Please enter a valid email address"
+
+  let zipCodeError = location !== "" ? /^[0-9]+$/.test(location) ? "" : "error": ""
+  let zipCodeHelper = zipCodeError !== "error"? "" : "Please enter a valid zipcode"
 
   let disabledButton;
 
@@ -101,7 +104,10 @@ export default function LoginSignUpForm({type, open, handleCloseForm, setSelecte
             setUserName(e.target.value);
             break;
         case "location":
+            if (/^[0-9]+$/.test(e.target.value))
+            {
             setLocation(e.target.value);
+            } 
             break;
         default:
             break;
@@ -217,6 +223,8 @@ export default function LoginSignUpForm({type, open, handleCloseForm, setSelecte
                     margin="dense"
                     label="Location"
                     value={location}
+                    error={zipCodeError}
+                    helperText={zipCodeHelper}
                     onChange={(e)=> {handleChange(e, "location")}}
                     type="text"
                     fullWidth

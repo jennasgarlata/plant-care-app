@@ -161,6 +161,20 @@ export default function PlantTile({plant, userId, setUserPlantData, setUserLocat
                         title={plant["plant-name"]} />
                     {cardMediaMarkup}
                   </div>;
+  
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  let mm = today.getMonth() + 1; // Months start at 0!
+  let dd = today.getDate();
+  if (dd < 10) dd = '0' + dd;
+  if (mm < 10) mm = '0' + mm;
+  const formattedToday = dd + '/' + mm + '/' + yyyy;
+  console.log(formattedToday)
+  const wateringToday = formattedToday === plant["next-watering"]? true : false
+  const colorFont = wateringToday? "orange" : "text.secondary";
+  console.log(wateringToday)
+
+
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -211,7 +225,7 @@ export default function PlantTile({plant, userId, setUserPlantData, setUserLocat
       <Card sx={{ maxWidth: 345 }}>
         {cardMedia}
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color={colorFont}>
           Next Scheduled Watering: {plant["next-watering"]}
           </Typography>
           <Button onClick={(e)=>{markPlantWatered()}}> Water Plant</Button>
