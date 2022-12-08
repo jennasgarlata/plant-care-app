@@ -14,7 +14,7 @@ import Select from '@mui/material/Select';
 import axios from 'axios';
 import * as Constants from '../../../Utils/Constants';
 
-export default function NewPlantForm({showNewPlantForm, setShowNewPlantForm, setUserPlantData, 
+export default function NewPlantForm({showNewPlantForm, setShowNewPlantForm, setUserPlantData, userPlantData,
                                       allPlants, userId}) 
 {
 
@@ -41,10 +41,27 @@ export default function NewPlantForm({showNewPlantForm, setShowNewPlantForm, set
                           &windowFacing=${directionOfWindow}`
     axios.get(addPlantAPI)
     .then(res => {
-        console.log(res.data)}
+      getUserPlantData();
+      }
     )
     handleClose()
-    getUserPlantData()
+    var newPlantObject = 
+    {
+      "generic-name": plantType,
+      "last-watered":"",
+      "next-watering": "",
+      "plant-location":locationOfPlant,
+      "plant-name":plantName,
+      "scientific-name":"",
+      "soil":"",
+      "sun":"",
+      "type": "",
+      "user-plant-id":"",
+      "water": "",
+      "window-facing" :directionOfWindow,
+    }
+    setUserPlantData([...userPlantData, newPlantObject])
+    // getUserPlantData()
   }
 
   const handleChange = (e, fieldType) => {

@@ -58,7 +58,8 @@ export default function LoginSignUpForm({type, open, handleCloseForm, setSelecte
             const loginAPI = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/Login?password=${password}&userName=${userName}`
             axios.get(loginAPI)
             .then(res => {
-                console.log(res.data)
+                console.log ('login userid');
+                console.log(res.data.userId)
                 setUserId(res.data.userid);
                 setNameText(res.data.name);
 
@@ -72,7 +73,8 @@ export default function LoginSignUpForm({type, open, handleCloseForm, setSelecte
             const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/CreateUser?location=${location}&name=${firstName + " " + lastName}&password=${password}t&userName=${userName}`
             axios.get(api)
             .then(res => {
-                console.log(res.data)
+                console.log ('login userid');
+                console.log(res.data.userId)
                 setUserId(res.data.userid);
                 setNameText(firstName);
             }

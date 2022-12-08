@@ -33,6 +33,12 @@ import MarbleImage from '../../../../Assets/marbleQueenPothos.jpg'
 import NeonImage from '../../../../Assets/neonPothos.jpg'
 import GoldenImage from '../../../../Assets/goldenPothos.jpg'
 import SatinImage from '../../../../Assets/satinPothos.jpg'
+import ArecaPalm from '../../../../Assets/arecaPalm.jpeg'
+import CatPalm from '../../../../Assets/catPalm.jpeg'
+import FuturaRobusta from '../../../../Assets/futuraRobusta.jpeg'
+import Cylindrica from '../../../../Assets/Cylindrica.jpeg'
+import BlackGold from '../../../../Assets/blackGold.jpeg'
+import BambooPalm from '../../../../Assets/bambooPalm.jpeg'
 import axios from 'axios';
 import * as Constants from'../../../Utils/Constants'
 import '../../../../CSS/Tile.css';
@@ -145,6 +151,54 @@ export default function PlantTile({plant, userId, setUserPlantData, setUserLocat
                           alt={plant["generic-name"]}/>
     cardAvatar= <Avatar alt={plant["generic-name"]} src={MotherImage} />
     break;
+    case Constants.BAMBOO_PALM : 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={BambooPalm}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={BambooPalm} />
+    break;
+    case Constants.ARECA_PALM : 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={ArecaPalm}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={ArecaPalm} />
+    break;
+    case Constants.CYLINDRICA : 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={Cylindrica}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={Cylindrica} />
+    break;
+    case Constants.BLACK_GOLD : 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={BlackGold}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={BlackGold} />
+    break;
+    case Constants.CAT_PALM : 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={CatPalm}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={CatPalm} />
+    break;
+    case Constants.FUTURA_ROBUSTA : 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={FuturaRobusta}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={FuturaRobusta} />
+    break;
     default:
       cardMediaMarkup = <CardMedia
               component="img"
@@ -169,12 +223,8 @@ export default function PlantTile({plant, userId, setUserPlantData, setUserLocat
   if (dd < 10) dd = '0' + dd;
   if (mm < 10) mm = '0' + mm;
   const formattedToday = dd + '/' + mm + '/' + yyyy;
-  console.log(formattedToday)
   const wateringToday = formattedToday === plant["next-watering"]? true : false
   const colorFont = wateringToday? "orange" : "text.secondary";
-  console.log(wateringToday)
-
-
 
   const handleExpandClick = () => {
     setExpanded(!expanded);

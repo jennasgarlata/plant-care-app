@@ -31,7 +31,12 @@ export const GOLDEN_POTHOS = "GOLDEN POTHOS";
 export const MARBLE_QUEEN_POTHOS = "MARBLE QUEEN POTHOS";
 export const NEON_POTHOS = "NEON POTHOS";
 export const SATIN_POTHOS = "SATIN POTHOS";
-
+export const ARECA_PALM = "ARECA PALM";
+export const FUTURA_ROBUSTA = "FUTURA ROBUSTA";
+export const CYLINDRICA = "CYLINDRICA";
+export const BLACK_GOLD = "BLACK GOLD";
+export const BAMBOO_PALM = "BAMBOO PALM";
+export const CAT_PALM = "CAT PALM"
 
 
 

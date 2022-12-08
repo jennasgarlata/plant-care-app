@@ -41,7 +41,7 @@ const renderUserScreen = () => {
 
   return (
     <div className="user-home-screen-container">
-      <h1 className='user-home-screen-welcome-title'>Welcome Back, {nameText}</h1>
+      <h1 className='user-home-screen-welcome-title'>Welcome Back!</h1>
       <div className='user-home-screen-content'>
         <div className="user-sidebar">
           {renderUserSideBar()}

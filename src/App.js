@@ -45,6 +45,8 @@ function App() {
         const api = `https://83ctihxxmi.execute-api.us-east-1.amazonaws.com/Prod/GetPlantsForUserId?userid=${userId}`;
         axios.get(api)
           .then(res => {
+            console.log ("plants")
+            console.log(res.data);
             setUserPlantData(res.data);}
           )
         };

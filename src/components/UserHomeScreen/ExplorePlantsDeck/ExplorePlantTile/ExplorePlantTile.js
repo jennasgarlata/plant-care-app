@@ -23,10 +23,16 @@ import MarbleImage from '../../../../Assets/marbleQueenPothos.jpg'
 import NeonImage from '../../../../Assets/neonPothos.jpg'
 import GoldenImage from '../../../../Assets/goldenPothos.jpg'
 import SatinImage from '../../../../Assets/satinPothos.jpg'
-// import loadingImage from '../../../../Assets/plant_loading.gif'
+import ArecaPalm from '../../../../Assets/arecaPalm.jpeg'
+import CatPalm from '../../../../Assets/catPalm.jpeg'
+import FuturaRobusta from '../../../../Assets/futuraRobusta.jpeg'
+import Cylindrica from '../../../../Assets/Cylindrica.jpeg'
+import BlackGold from '../../../../Assets/blackGold.jpeg'
+import BambooPalm from '../../../../Assets/bambooPalm.jpeg'
 import mysteryIcon from '../../../../Assets/mysteryIcon.jpeg'
 import * as Constants from '../../../Utils/Constants'
 import '../../../../CSS/Tile.css';
+import { cyan } from '@mui/material/colors';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -141,6 +147,54 @@ export default function ExplorePlantTile({plant}) {
                           alt={plant["generic-name"]}/>
     cardAvatar= <Avatar alt={plant["generic-name"]} src={MotherImage} />
     break;
+    case Constants.BAMBOO_PALM : 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={BambooPalm}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={BambooPalm} />
+    break;
+    case Constants.ARECA_PALM : 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={ArecaPalm}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={ArecaPalm} />
+    break;
+    case Constants.CYLINDRICA : 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={Cylindrica}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={Cylindrica} />
+    break;
+    case Constants.BLACK_GOLD : 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={BlackGold}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={BlackGold} />
+    break;
+    case Constants.CAT_PALM : 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={CatPalm}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={CatPalm} />
+    break;
+    case Constants.FUTURA_ROBUSTA : 
+    cardMediaMarkup = <CardMedia
+                          component="img"
+                          height="194"
+                          image={FuturaRobusta}
+                          alt={plant["generic-name"]}/>
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={FuturaRobusta} />
+    break;
     default:
       cardMediaMarkup = <CardMedia
               component="img"
@@ -154,7 +208,7 @@ export default function ExplorePlantTile({plant}) {
   let cardMedia =  <div>
                     <CardHeader
                         avatar={cardAvatar}
-                        title={plant["plant-name"]} />
+                        title={plant["generic-name"]} />
                     {cardMediaMarkup}
                   </div>;
 
