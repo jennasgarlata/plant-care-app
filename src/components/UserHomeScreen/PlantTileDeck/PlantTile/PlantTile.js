@@ -39,6 +39,7 @@ import FuturaRobusta from '../../../../Assets/futuraRobusta.jpeg'
 import Cylindrica from '../../../../Assets/Cylindrica.jpeg'
 import BlackGold from '../../../../Assets/blackGold.jpeg'
 import BambooPalm from '../../../../Assets/bambooPalm.jpeg'
+import plantLoading from '../../../../Assets/plant_loading.gif'
 import axios from 'axios';
 import * as Constants from'../../../Utils/Constants'
 import '../../../../CSS/Tile.css';
@@ -203,9 +204,9 @@ export default function PlantTile({plant, userId, setUserPlantData, setUserLocat
       cardMediaMarkup = <CardMedia
               component="img"
               height="194"
-              image={tempImage}
+              image={plantLoading}
               alt={plant["generic-name"]}/>
-    cardAvatar= <Avatar alt={plant["generic-name"]} src={tempImage} />
+    cardAvatar= <Avatar alt={plant["generic-name"]} src={plantLoading} />
     break;
   }
 
