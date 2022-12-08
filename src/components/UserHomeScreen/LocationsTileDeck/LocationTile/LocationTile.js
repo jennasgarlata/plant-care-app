@@ -56,7 +56,7 @@ export default function LocationTile({location}) {
         cardMediaMarkup = <CardMedia
                 component="img"
                 height="194"
-                image={guestRoomIcon}
+                image={bedroomIcon}
                 alt={location}/>
         cardAvatar= <Avatar alt={location} src={bedroomIcon} />
         break;
